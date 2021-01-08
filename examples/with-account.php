@@ -8,8 +8,10 @@ $api = "https://api.ineo-team.ir"; // Don't change it.
 // API parameters:
 $parameters = http_build_query(array(
 	'link' => "https://example.ir/project/b.php", // Required
-  'time' => 30, // Required, Times: 1, 2, 5, 10, 15 and 30
-  'name' => "myCronJob" // Optional
+	'time' => 30, // Required, Times: 1, 2, 5, 10, 15 and 30
+	'name' => "myCronJob", // Optional
+	'email' => "myAccountEmail@example.com", // Required, Register on https://cron-job.org
+	'password' => "myAccountPassword"  // Required, Register on https://cron-job.org
 ));
 // API request url:
 $requestUrl = $api."/cronjob.php?".$parameters; // Don't change it.
@@ -17,11 +19,12 @@ $requestUrl = $api."/cronjob.php?".$parameters; // Don't change it.
 $output = json_decode(file_get_contents($requestUrl));
 // Show output data with json:
 echo json_encode(['ok' => $output->ok, 'status' => $output->status, 'result' => [
-  'link' => $output->result->link,
-  'time' => $output->result->time,
-  'name' => $output->result->name,
-  'code' => $output->result->code,
-  'id' => $output->result->id,
+	'link' => $output->result->link,
+	'time' => $output->result->time,
+	'name' => $output->result->name,
+	'code' => $output->result->code,
+	'id' => $output->result->id,
+	'type' => $output->result->type,
 ]]);
 // Delete error_log file:
 unlink("error_log");
